@@ -1,0 +1,198 @@
+simulado.c:1:7: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘<’ token
+ nclude<stdio.h>
+       ^
+In file included from simulado.c:2:0:
+/usr/include/string.h:47:8: error: unknown type name ‘size_t’
+        size_t __n) __THROW __nonnull ((1, 2));
+        ^
+/usr/include/string.h:50:56: error: unknown type name ‘size_t’
+ extern void *memmove (void *__dest, const void *__src, size_t __n)
+                                                        ^
+/usr/include/string.h:59:18: error: unknown type name ‘size_t’
+         int __c, size_t __n)
+                  ^
+/usr/include/string.h:66:42: error: unknown type name ‘size_t’
+ extern void *memset (void *__s, int __c, size_t __n) __THROW __nonnull ((1));
+                                          ^
+/usr/include/string.h:69:56: error: unknown type name ‘size_t’
+ extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+                                                        ^
+/usr/include/string.h:96:48: error: unknown type name ‘size_t’
+ extern void *memchr (const void *__s, int __c, size_t __n)
+                                                ^
+/usr/include/string.h:133:39: error: unknown type name ‘size_t’
+         const char *__restrict __src, size_t __n)
+                                       ^
+/usr/include/string.h:141:9: error: unknown type name ‘size_t’
+         size_t __n) __THROW __nonnull ((1, 2));
+         ^
+/usr/include/string.h:147:57: error: unknown type name ‘size_t’
+ extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+                                                         ^
+/usr/include/string.h:154:1: error: unknown type name ‘size_t’
+ extern size_t strxfrm (char *__restrict __dest,
+ ^
+/usr/include/string.h:155:40: error: unknown type name ‘size_t’
+          const char *__restrict __src, size_t __n)
+                                        ^
+In file included from simulado.c:2:0:
+/usr/include/string.h:169:1: error: unknown type name ‘size_t’
+ extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
+ ^
+/usr/include/string.h:169:59: error: unknown type name ‘size_t’
+ extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
+                                                           ^
+/usr/include/string.h:184:45: error: unknown type name ‘size_t’
+ extern char *strndup (const char *__string, size_t __n)
+                                             ^
+/usr/include/string.h:285:1: error: unknown type name ‘size_t’
+ extern size_t strcspn (const char *__s, const char *__reject)
+ ^
+/usr/include/string.h:289:1: error: unknown type name ‘size_t’
+ extern size_t strspn (const char *__s, const char *__accept)
+ ^
+/usr/include/string.h:399:1: error: unknown type name ‘size_t’
+ extern size_t strlen (const char *__s)
+ ^
+/usr/include/string.h:406:1: error: unknown type name ‘size_t’
+ extern size_t strnlen (const char *__string, size_t __maxlen)
+ ^
+/usr/include/string.h:406:46: error: unknown type name ‘size_t’
+ extern size_t strnlen (const char *__string, size_t __maxlen)
+                                              ^
+In file included from /usr/include/features.h:374:0,
+                 from /usr/include/string.h:25,
+                 from simulado.c:2:
+/usr/include/string.h:427:12: error: unknown type name ‘size_t’
+ extern int __REDIRECT_NTH (strerror_r,
+            ^
+In file included from simulado.c:2:0:
+/usr/include/string.h:451:33: error: unknown type name ‘size_t’
+ extern void __bzero (void *__s, size_t __n) __THROW __nonnull ((1));
+                                 ^
+/usr/include/string.h:455:53: error: unknown type name ‘size_t’
+ extern void bcopy (const void *__src, void *__dest, size_t __n)
+                                                     ^
+/usr/include/string.h:459:31: error: unknown type name ‘size_t’
+ extern void bzero (void *__s, size_t __n) __THROW __nonnull ((1));
+                               ^
+/usr/include/string.h:462:54: error: unknown type name ‘size_t’
+ extern int bcmp (const void *__s1, const void *__s2, size_t __n)
+                                                      ^
+/usr/include/string.h:538:61: error: unknown type name ‘size_t’
+ extern int strncasecmp (const char *__s1, const char *__s2, size_t __n)
+                                                             ^
+/usr/include/string.h:575:34: error: unknown type name ‘size_t’
+    const char *__restrict __src, size_t __n)
+                                  ^
+/usr/include/string.h:578:39: error: unknown type name ‘size_t’
+         const char *__restrict __src, size_t __n)
+                                       ^
+In file included from simulado.c:4:0:
+/usr/include/stdlib.h:139:1: error: unknown type name ‘size_t’
+ extern size_t __ctype_get_mb_cur_max (void) __THROW __wur;
+ ^
+In file included from simulado.c:4:0:
+/usr/include/stdlib.h:331:4: error: unknown type name ‘size_t’
+    size_t __statelen) __THROW __nonnull ((2));
+    ^
+/usr/include/stdlib.h:361:4: error: unknown type name ‘size_t’
+    size_t __statelen,
+    ^
+/usr/include/stdlib.h:466:22: error: unknown type name ‘size_t’
+ extern void *malloc (size_t __size) __THROW __attribute_malloc__ __wur;
+                      ^
+/usr/include/stdlib.h:468:22: error: unknown type name ‘size_t’
+ extern void *calloc (size_t __nmemb, size_t __size)
+                      ^
+/usr/include/stdlib.h:468:38: error: unknown type name ‘size_t’
+ extern void *calloc (size_t __nmemb, size_t __size)
+                                      ^
+/usr/include/stdlib.h:480:36: error: unknown type name ‘size_t’
+ extern void *realloc (void *__ptr, size_t __size)
+                                    ^
+In file included from /usr/include/stdlib.h:492:0,
+                 from simulado.c:4:
+/usr/include/alloca.h:32:22: error: unknown type name ‘size_t’
+ extern void *alloca (size_t __size) __THROW;
+                      ^
+In file included from simulado.c:4:0:
+/usr/include/stdlib.h:498:22: error: unknown type name ‘size_t’
+ extern void *valloc (size_t __size) __THROW __attribute_malloc__ __wur;
+                      ^
+/usr/include/stdlib.h:503:45: error: unknown type name ‘size_t’
+ extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+                                             ^
+/usr/include/stdlib.h:503:65: error: unknown type name ‘size_t’
+ extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
+                                                                 ^
+/usr/include/stdlib.h:756:9: error: unknown type name ‘size_t’
+         size_t __nmemb, size_t __size, __compar_fn_t __compar)
+         ^
+/usr/include/stdlib.h:756:25: error: unknown type name ‘size_t’
+         size_t __nmemb, size_t __size, __compar_fn_t __compar)
+                         ^
+/usr/include/stdlib.h:765:34: error: unknown type name ‘size_t’
+ extern void qsort (void *__base, size_t __nmemb, size_t __size,
+                                  ^
+/usr/include/stdlib.h:765:50: error: unknown type name ‘size_t’
+ extern void qsort (void *__base, size_t __nmemb, size_t __size,
+                                                  ^
+/usr/include/stdlib.h:844:6: error: unknown type name ‘size_t’
+      size_t __len) __THROW __nonnull ((3, 4, 5));
+      ^
+/usr/include/stdlib.h:847:6: error: unknown type name ‘size_t’
+      size_t __len) __THROW __nonnull ((3, 4, 5));
+      ^
+/usr/include/stdlib.h:851:31: error: unknown type name ‘size_t’
+       char *__restrict __buf, size_t __len)
+                               ^
+/usr/include/stdlib.h:855:31: error: unknown type name ‘size_t’
+       char *__restrict __buf, size_t __len)
+                               ^
+/usr/include/stdlib.h:863:36: error: unknown type name ‘size_t’
+ extern int mblen (const char *__s, size_t __n) __THROW;
+                                    ^
+/usr/include/stdlib.h:867:34: error: unknown type name ‘size_t’
+      const char *__restrict __s, size_t __n) __THROW;
+                                  ^
+/usr/include/stdlib.h:874:1: error: unknown type name ‘size_t’
+ extern size_t mbstowcs (wchar_t *__restrict  __pwcs,
+ ^
+/usr/include/stdlib.h:875:32: error: unknown type name ‘size_t’
+    const char *__restrict __s, size_t __n) __THROW;
+                                ^
+/usr/include/stdlib.h:877:1: error: unknown type name ‘size_t’
+ extern size_t wcstombs (char *__restrict __s,
+ ^
+/usr/include/stdlib.h:878:38: error: unknown type name ‘size_t’
+    const wchar_t *__restrict __pwcs, size_t __n)
+                                      ^
+simulado.c: In function ‘main’:
+simulado.c:35:2: warning: incompatible implicit declaration of built-in function ‘printf’ [enabled by default]
+  printf("\n1 - Cadastrar Bomba");
+  ^
+simulado.c:41:9: error: ‘stdin’ undeclared (first use in this function)
+  fflush(stdin);
+         ^
+simulado.c:41:9: note: each undeclared identifier is reported only once for each function it appears in
+simulado.c:42:2: warning: incompatible implicit declaration of built-in function ‘scanf’ [enabled by default]
+  scanf("%c",&opcao);
+  ^
+simulado.c: In function ‘cadastrar’:
+simulado.c:81:2: warning: incompatible implicit declaration of built-in function ‘printf’ [enabled by default]
+  printf("Digite o n�mero da bomba: ");
+  ^
+simulado.c:82:9: error: ‘stdin’ undeclared (first use in this function)
+  fflush(stdin);
+         ^
+simulado.c:83:2: warning: incompatible implicit declaration of built-in function ‘scanf’ [enabled by default]
+  scanf("%i",&aux.numero);
+  ^
+simulado.c: In function ‘estoque’:
+simulado.c:95:3: warning: incompatible implicit declaration of built-in function ‘printf’ [enabled by default]
+   printf("\n\t ==> Sem bombas cadastradas");
+   ^
+simulado.c:98:5: warning: incompatible implicit declaration of built-in function ‘printf’ [enabled by default]
+     printf("\n\t==> Bomba n�: %i",registro->infos[x].numero);
+     ^
