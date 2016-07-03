@@ -57,7 +57,7 @@ void insertNotas(Aluno aluno, double notaP1, double notaP2, double notaTrabalho)
 void delete(Aluno aluno);
 void searchByName(Aluno aluno, Colegio colegio);
 void reportByGen(Aluno aluno, Colegio colegio);
-void reportByAprov();
+void reportByAprov(Colegio colegio);
 void exibir();
 
 /*program*/
@@ -150,6 +150,9 @@ aluno.matricula=1;
 				printf("\t+------------------------+\n");
                                 printf("\t| RELATORIO DE APROVADOS |\n");
                                 printf("\t+------------------------+\n");
+				
+				reportByAprov(colegio);
+				
 
 				break;
 			case 'S': printf("\nSAIR...\n");
@@ -231,4 +234,28 @@ void reportByGen(Aluno aluno, Colegio colegio){
                 printf("\n\n\n");
                 }
         }
+}
+void reportByAprov(Colegio colegio){
+        
+        int cont;
+        for(cont=0;cont<colegio.indice;cont++){
+	
+	float media;
+	media = (colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3;
+	
+        if(media >= 7){
+                printf("+----------------------------------------------------------------+\n");
+                printf("|\tNome.................... %s",colegio.alunos[cont].nome);
+                printf("|\tMatricula............... %i\n",colegio.alunos[cont].matricula);
+               // printf("|\tSexo.................... %c\n",colegio.alunos[cont].sexo);
+               // printf("|\tNota P1................. %.2f\n",colegio.alunos[cont].notaP1);
+               // printf("|\tNota P2................. %.2f\n",colegio.alunos[cont].notaP2);
+               // printf("|\tNota do Trabalho........ %.2f\n",colegio.alunos[cont].notaTrabalho);
+               // printf("|\t                         ------\n");
+                printf("|\tMedia................... %.2f\n",(colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3);
+                printf("+----------------------------------------------------------------+");
+                printf("\n\n\n");
+                }
+        }
+
 }
