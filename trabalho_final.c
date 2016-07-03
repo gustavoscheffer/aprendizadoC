@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include<string.h>
-#define QTD 10
+#include<ctype.h> //using toupper
+#include<stdlib.h> // using system function 
+#include <stdio_ext.h> // using '__fpurge(stdin' -> limpeza buffer linux
+#define QTD 50
+#define CHARNOME 50
+
 /*
 ->Criar a seguinte estrutura para os dados dos alunos:
 Matricula
@@ -26,7 +31,7 @@ S -      Sair do program
 
 typedef struct{
 
-        char nome[50];
+        char nome[30];
         char sexo;
         double notaP1;
         double notaP2;
@@ -50,15 +55,10 @@ typedef struct{
 void insert(Aluno aluno, Colegio *colegio);
 void insertNotas(Aluno aluno, double notaP1, double notaP2, double notaTrabalho);
 void delete(Aluno aluno);
-void searchByName(Aluno aluno);
-void reportByGen(char genero);
+void searchByName(Aluno aluno, Colegio colegio);
+void reportByGen(Aluno aluno, Colegio colegio);
 void reportByAprov();
 void exibir();
-
-// funcao para verificar se esta cadastrando. ----temporaria.
-void relatorio(Colegio colegio);
-
-
 
 /*program*/
 void main(){
@@ -84,37 +84,73 @@ aluno.matricula=1;
 		printf("==> ");
 		
 		scanf("%c",&opcao);
+		opcao = toupper(opcao);
 		__fpurge(stdin);
                 fflush(stdin);
 		
 		switch(opcao){
-			case '1': printf("\n***CADASTRAR ALUNO***\n");
+			case '1':printf("\n");
+				printf("\t+---------------------+\n"); 
+				printf("\t|   CADASTRAR ALUNO   |\n");
+				printf("\t+---------------------+\n");
 				
-				printf("Nome: ");
-				fgets(aluno.nome,50,stdin);	
-				
-				printf("Sexo:(M) masculino ou (F)feminino: ");
+				printf("\t[Nome]: ");
+				fgets(aluno.nome,CHARNOME,stdin);	
+				printf("\t[Sexo:(M) masculino ou (F)feminino]: ");
 				scanf("%c",&aluno.sexo);
 				__fpurge(stdin);
                			fflush(stdin);	
-				
 				insert(aluno, &colegio);
 				aluno.matricula++;
 				break;	
 
-			case '2':printf("\n***EXIBIR CADASTROS***\n");
+			case '2':
+				printf("\t+---------------------+\n");
+                                printf("\t|   EXIBIR CADASTRO   |\n");
+                                printf("\t+---------------------+\n");
+
 				exibir(colegio);
 				break;
 			
-			case '3':printf("\n***EXCLUIR ALUNO***\n");
+			case '3':
+                                printf("\t+---------------------+\n");
+                                printf("\t|   EXCLUIR ALUNO     |\n");
+                                printf("\t+---------------------+\n");
+
 				break;
-			case '4':printf("\n***PROCURAR ALUNO POR NOME***\n");
+			case '4':
+				printf("\t+------------------------+\n");
+                                printf("\t| PROCURA ALUNO POR NOME |\n");
+                                printf("\t+------------------------+\n");
+				
+				printf("\nDigite o nome completo do aluno:");
+				fgets(aluno.nome,CHARNOME,stdin);
+				searchByName(aluno, colegio);
+
 				break;
-			case '5': printf("\n***LANCAR NOTA***\n");
+			case '5': 
+				printf("\t+-----------------+\n");
+                                printf("\t|   LANCAR NOTA   |\n");
+                                printf("\t+-----------------+\n");
+
 				break;
-			case '6': printf("\n***RELATORIO POR GENERO***\n");
+			case '6': 
+				printf("\t+----------------------+\n");
+                                printf("\t| RELATORIO POR GENERO |\n");
+                                printf("\t+----------------------+\n");
+				
+				printf("\tDigite o Genero que deseja buscar.\n\t[M] para masculino ou [F] para feminino:\n");
+                                scanf("\n%c",&aluno.sexo);
+				__fpurge(stdin);
+				fflush(stdin);
+                                reportByGen(aluno, colegio);
+
 				break;
-			case '7': printf("\n***RELATORIO APROVACAO- TESTE GERAL...***\n");
+			case '7':
+				printf("\t+------------------------+\n");
+                                printf("\t| RELATORIO DE APROVADOS |\n");
+                                printf("\t+------------------------+\n");
+
 				break;
 			case 'S': printf("\nSAIR...\n");
 				break;
@@ -122,8 +158,7 @@ aluno.matricula=1;
 				break;
 				
 		}		
-		system("clear");	
-	}while(toupper(opcao) != 'S' );
+	}while(opcao != 'S' );
 
 }
 
@@ -132,34 +167,68 @@ void insert(Aluno aluno, Colegio *colegio){
 	
 	colegio->alunos[colegio->indice]=aluno;
 	printf("ALUNO CADASTRADO COM EXITO: %s", colegio->alunos[colegio->indice].nome);
-	system("sleep 5");
+	//system("sleep 5");
 	colegio->indice++;
-	printf("\n\n");
-	
+	printf("\n\n");	
 }
 
 void exibir(Colegio colegio){
 	
-	int cont;
-	
+	int cont;	
 	printf("RELATORIO DE ALUNOS\n");
 	
 	for(cont=0;cont<colegio.indice;cont++){
-
-		printf("\tMatricula             => %i\n",colegio.alunos[cont].matricula);
-		printf("\tNome                  => %s\n",colegio.alunos[cont].nome);
-                printf("\tSexo                  => (%c)\n\n",colegio.alunos[cont].sexo);
-		printf("\tNota P1               => %.2f\n",colegio.alunos[cont].notaP1);
-		printf("\tNota P2               => %.2f\n",colegio.alunos[cont].notaP2);
-		printf("\tNota do Trabalho      => %.2f\n",colegio.alunos[cont].notaTrabalho);
-		printf("\t                         ------\n");
-		printf("\tMedia                 => %.2f",(colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3);
+		printf("+----------------------------------------------------------------+\n");
+		printf("|\tNome.................... %s",colegio.alunos[cont].nome);
+		printf("|\tMatricula............... %i\n",colegio.alunos[cont].matricula);
+                printf("|\tSexo.................... %c\n",colegio.alunos[cont].sexo);
+		printf("|\tNota P1................. %.2f\n",colegio.alunos[cont].notaP1);
+		printf("|\tNota P2................. %.2f\n",colegio.alunos[cont].notaP2);
+		printf("|\tNota do Trabalho........ %.2f\n",colegio.alunos[cont].notaTrabalho);
+		printf("|\t                         ------\n");
+		printf("|\tMedia................... %.2f\n",(colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3);
+		printf("+----------------------------------------------------------------+");
 		printf("\n\n\n");
 	}
 }
 
+void searchByName(Aluno aluno, Colegio colegio){
+	
+	int cont;
+	for(cont=0;cont<colegio.indice;cont++){
+		if(strcmp(aluno.nome, colegio.alunos[cont].nome) == 0){
+		printf("+----------------------------------------------------------------+\n");
+                printf("|\tNome.................... %s",colegio.alunos[cont].nome);
+                printf("|\tMatricula............... %i\n",colegio.alunos[cont].matricula);
+                printf("|\tSexo.................... %c\n",colegio.alunos[cont].sexo);
+                printf("|\tNota P1................. %.2f\n",colegio.alunos[cont].notaP1);
+                printf("|\tNota P2................. %.2f\n",colegio.alunos[cont].notaP2);
+                printf("|\tNota do Trabalho........ %.2f\n",colegio.alunos[cont].notaTrabalho);
+                printf("|\t                         ------\n");
+                printf("|\tMedia................... %.2f\n",(colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3);
+                printf("+----------------------------------------------------------------+");
+                printf("\n\n\n");		
+		}
+	}
 
+}
 
+void reportByGen(Aluno aluno, Colegio colegio){
 
-
-
+	int cont;
+	for(cont=0;cont<colegio.indice;cont++){
+	if(aluno.sexo == colegio.alunos[cont].sexo){
+		printf("+----------------------------------------------------------------+\n");
+                printf("|\tNome.................... %s",colegio.alunos[cont].nome);
+                printf("|\tMatricula............... %i\n",colegio.alunos[cont].matricula);
+                printf("|\tSexo.................... %c\n",colegio.alunos[cont].sexo);
+                printf("|\tNota P1................. %.2f\n",colegio.alunos[cont].notaP1);
+                printf("|\tNota P2................. %.2f\n",colegio.alunos[cont].notaP2);
+                printf("|\tNota do Trabalho........ %.2f\n",colegio.alunos[cont].notaTrabalho);
+                printf("|\t                         ------\n");
+                printf("|\tMedia................... %.2f\n",(colegio.alunos[cont].notaP1+colegio.alunos[cont].notaP2+colegio.alunos[cont].notaTrabalho)/3);
+                printf("+----------------------------------------------------------------+");
+                printf("\n\n\n");
+                }
+        }
+}
