@@ -1,0 +1,50 @@
+void new_ordenacao(LISTA* *l ){
+
+	LISTA *min;
+	LISTA *x = *l;
+	LISTA *y;
+	LISTA *aux;
+
+	//VERIFICAR SE A LISTA NAO ESTA VAZIA
+	if (*l != NULL){
+		
+		while(x !=NULL){
+	  		
+	  		printf("\n Entrou no x");
+	  		
+	  		min = x;
+	  		y = x->proximo;
+	  		while(y !=NULL){
+	  			printf("\n Entrou no y");
+
+	  			if (y->entidade.codigo < min->entidade.codigo){
+					printf("\n Entrou na troca do y para o min...");	  				
+	  				min = y;
+	  			}	  			
+
+	  			//VAI PARA O PROXIMO NODO Y
+	  			y = y->proximo;
+	  			printf("\nEste é o aux min: %d", min);
+	  			printf("\nEste é o aux x: %d", x);
+	  		}
+
+	  		if (min != x){
+				printf("\n Faz a troca do x para o min");
+
+				aux->entidade = x->entidade;
+				printf("\nEste é o aux codigo: %d", aux->entidade.codigo);
+				x->entidade = min->entidade;
+				min->entidade = aux->entidade;
+				printf("\nEste é o aux min: %d", min->entidade.codigo);
+	  		}			
+
+	  		//VAI PARA O PROXIMO NODO X
+	  		x = x->proximo;	
+	  	}
+	  
+	}else{
+	  	
+	  	printf("\n Lista vazia!");
+	}  
+
+}
