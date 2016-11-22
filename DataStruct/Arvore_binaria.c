@@ -171,7 +171,9 @@ void insere( ARVORE** r )
 {
   // ALOCANDO MEMORIA PARA O NOVO NODO
   ARVORE *nodo = (ARVORE *) malloc(sizeof(ARVORE));
-  ARVORE *aux = *r; // LISTA AUXILIAR PARA ITERARMOS
+  
+  ARVORE *atu = *r; //PONTEIRO QUE VAI ANDAR PE ARVORE
+  ARVORE *ant; //PONTEIRO QUE GUARDARÁ A POSIÇÃO ANTERIOR A atu(ATUAL)
 
   //VERIFICAR SE TEMOS MEMORIA;
   if (nodo != NULL)
@@ -187,37 +189,35 @@ void insere( ARVORE** r )
     }else{
 
       printf("\n ARVORE NAO VAZIA!" );
-      //VAI ANDAR PARA ESQ OU DIR ATE ENCONTRAR A PONTA DA ARVORE
-      while(aux != NULL){
+      
+      //VAI ANDAR PARA ESQ OU DIR ATE ENCONTRAR O NULL
+      while(atu != NULL){
         printf("\n Entrou while!" );
 
+        //ANTERIOR RECEBE O VALOR DE ATU(atual)
+        ant = atu;
+
         //VERIFICA QUEM É MAIOR
-        if (nodo->info.codigo < aux->info.codigo)
+        if (nodo->info.codigo < atu->info.codigo)
         { 
           printf("\n ESQUERDA!" );
           //VAI PARA A ESQUERDA
-          aux = aux->sube;
+          atu = atu->sube;
 
         }else{
           printf("\n DIREITA!" );
           //VAI PARA A DIREITA
-          aux = aux->subd;
+          atu = atu->subd;
         }
-
       }
-      //nodo EH COLOCADO COM FOLHA DA ARVORE
-        if (nodo->info.codigo < aux->info.codigo)
-        { 
-          printf("\n ESQUERDA!" );
-          //VAI PARA A ESQUERDA
-          aux->sube  = nodo;
 
-        }else{
-          printf("\n DIREITA!" );
-          //VAI PARA A DIREITA
-          aux->subd  = nodo;
-        }
-
+      //VERIFICA EM QUAL LADO DA ARVORE O atu(ATUAL) parou
+      if (ant->sube == atu)
+            {
+              ant->sube = nodo;
+            }else{
+              ant->subd = nodo;
+            }     
     }
 
   }else{
