@@ -9,6 +9,7 @@
 #include <stdio.h>
 //#include <conio.h>
 #include <stdlib.h>
+#include <stdio_ext.h>
 #include <string.h>
 
 
@@ -38,12 +39,15 @@ void    entrada_dados ( ARVORE* aux ); // leitura dos dados de entrada
 void    imprime_ARVORE( ARVORE* aux ); // visualizacao da lista em tela
 void    cria_ARVORE   ( ARVORE** r );  // inicializa arvore com NULL
 void    insere        ( ARVORE** r );  // inclui um novo registro na arvore
-int     busca         ( int codigo, ARVORE** a, ARVORE** p ); // procura na arvore por uma matricula
+void    busca         ( int cod, ARVORE** a); // procura na arvore por uma matricula
 void    sucessor      ( ARVORE* p, ARVORE** q, ARVORE** b );
 void    antecessor    ( ARVORE* p, ARVORE** q, ARVORE** b );
 void    remove_registro        ( ARVORE** r );  // exclui um regitro por matricula
+void    imprime_PRE_ORDEM ( ARVORE* aux ); // imprime em pre ordem
+void    imprime_IN_ORDEM ( ARVORE* aux ); // imprime em in ordem
+void    imprime_POS_ORDEM ( ARVORE* aux ); // imprime em pos ordem 
 
-
+void    chama_busca(ARVORE** a);   
        
 /***********************************************/ 
 /* Programa Principal                          */
@@ -59,8 +63,12 @@ int main( void )
          printf( "\n [1] Cria ARVORE                                      " );
          printf( "\n [2] Insere                                           " );
          printf( "\n [3] Remove                                           " );
-         printf( "\n [4] Imprime                                          " );         
-         printf( "\n [5] Para sair do programa                            " );
+         printf( "\n [4] Imprime                                          " );
+         printf( "\n [5] Pre Ordem                                        " );
+         printf( "\n [6] In Ordem                                         " );
+         printf( "\n [7] Pos Ordem                                        " );         
+         printf( "\n  [8] Busca                                            " );
+         printf( "\n [9] Para sair do programa                            " );
          printf( "\n /---------------------------------------------------/" );      
          printf( "\n Opcao: " );
          op = getchar(); // tecla de opcao do menu
@@ -75,14 +83,25 @@ int main( void )
                    break;
                       
            case '3':  // rotina exclui nodo da ARVORE
-                   remove_registro( &r );
+                   //remove_registro( &r );
                    break;
            
            case '4':  // rotina exclui nodo da ARVORE
                    imprime_ARVORE( r );
-                   break;                   
-                                                         
-           case '5': // t�rmino do programa                                                 
+                   break;
+           case '5':  // rotina que imprime em PreOrdem
+                   imprime_PRE_ORDEM( r );
+                   break;
+           case '6':  // rotina que imprime em InOrdem
+                   imprime_IN_ORDEM( r );
+                   break;                                                                                            
+           case '7':  // rotina que imprime em InOrdem
+                   imprime_POS_ORDEM( r );
+                   break;
+           case '8':  // rotina que imprime em InOrdem
+                   chama_busca( &r );
+                   break;                                                                                                    
+           case '9': // t�rmino do programa                                                 
                    exit( 1 ); 
                    break;
                 
@@ -133,7 +152,7 @@ void entrada_dados( ARVORE* aux )
  *************************************************/ 
 void imprime_ARVORE( ARVORE* aux )
 {    
-     
+    
     if( aux != NULL ){ // verifica se a raiz e diferente de vazio
         printf( "\n Nome.....: %d", aux->info.codigo );
         getchar();
@@ -146,6 +165,53 @@ void imprime_ARVORE( ARVORE* aux )
        printf("\n Arvore vazia!");
 }
 
+/*****************************************************
+ * imprime_PRE_ORDEM                                 *
+ * objetivo: rotina para imprimir dados em pos ordem *
+ * entrada : ARVORE                                  *
+ * sa�da   : nenhuma                                 *
+******************************************************/ 
+void imprime_PRE_ORDEM( ARVORE* aux )
+{    
+    
+    if( aux != NULL ){ // verifica se a raiz e diferente de vazio
+        printf( "\n%d", aux->info.codigo );        
+        imprime_PRE_ORDEM( aux->sube );
+        imprime_PRE_ORDEM( aux->subd );
+    }
+}
+
+/*****************************************************
+ * imprime_IN_ORDEM                                  *
+ * objetivo: rotina para imprimir dados em IN ordem *
+ * entrada : ARVORE                                  *
+ * sa�da   : nenhuma                                 *
+******************************************************/ 
+void imprime_IN_ORDEM( ARVORE* aux)
+{    
+    
+    if( aux != NULL ){ // verifica se a raiz e diferente de vazio
+        imprime_IN_ORDEM( aux->sube );
+        printf( "\n%d", aux->info.codigo );
+        imprime_IN_ORDEM( aux->subd );
+    }
+}  
+
+/*****************************************************
+ * imprime_POS_ORDEM                                  *
+ * objetivo: rotina para imprimir dados em POS ordem *
+ * entrada : ARVORE                                  *
+ * sa�da   : nenhuma                                 *
+******************************************************/ 
+void imprime_POS_ORDEM( ARVORE* aux)
+{    
+    
+    if( aux != NULL ){ // verifica se a raiz e diferente de vazio
+        imprime_POS_ORDEM( aux->sube );
+        imprime_POS_ORDEM( aux->subd );
+        printf( "\n%d", aux->info.codigo );
+    }
+}
 
 
 /************************************************
@@ -211,7 +277,7 @@ void insere( ARVORE** r )
         }
       }
 
-      //VERIFICA EM QUAL LADO DA ARVORE O atu(ATUAL) parou
+      //VERIFICA EM QUAL LADO DA ARVORE O atu(ATUAL) PAROU E INSERE O DADO.
       if (ant->sube == atu)
             {
               ant->sube = nodo;
@@ -234,9 +300,22 @@ void insere( ARVORE** r )
  * entrada : ARVORE e c�digo a ser excluido     *
  * sa�da   : posicao ou NULL (n�o encontrou)    *
  ************************************************/ 
-int busca( int cod, ARVORE** a, ARVORE** p )
+void busca(int cod, ARVORE** a)
 {
-
+  ARVORE *aux = *a;
+    
+  if (aux == NULL)
+  {
+    printf("\n VALOR NAO ENCONTRADO!");
+  }else if(cod < aux->info.codigo)
+    {
+      busca(cod, &aux->sube);
+      
+    }else if (cod > aux->info.codigo){
+      busca(cod, &aux->subd);
+    }else{
+      printf("\n Dado Encontrado");
+    }
 }
 
 
@@ -247,6 +326,7 @@ int busca( int cod, ARVORE** a, ARVORE** p )
  * entrada : ARVORE                                *
  * sa�da   : ARVORE                                *
  ***************************************************/ 
+/*
 void remove_registro( ARVORE** r )
 {
     ARVORE* p;    // ponteiro auxiliar
@@ -270,7 +350,7 @@ void remove_registro( ARVORE** r )
        }
    }
 }
-
+*/
 
 /*************************************************** 
  * sucessor                                        *
@@ -306,4 +386,20 @@ void antecessor( ARVORE* p, ARVORE** q, ARVORE** b )
            *b= *q;
            *q= (*q)->subd;
         }
-}         
+}
+
+// TESTE DE BUSCA
+
+void chama_busca(ARVORE** a){
+  
+  int valor;
+
+  printf("\nDigite o cod a ser buscado: ");
+  
+  fflush(stdin);
+  __fpurge(stdin);
+
+  scanf("%d", &valor);
+
+  busca(valor, a);
+}       
